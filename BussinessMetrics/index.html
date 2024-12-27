@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Infin</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="../assets/img/InfinLogo/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ["Public Sans:300,400,500,600,700"],
+        },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+  </head>
+
+  <body>
+    <!--  Display  Spinner-->
+    <div id="overlay"></div>
+    <div id="loader" style="display: none">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Full Content of Page -->
+    <div class="wrapper" id="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="light">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="light">
+            <a href="index.html" class="logo">
+              <img
+                src="../assets/img/InfinLogo/infin.svg"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="50"
+              />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item ">
+                <a href="../">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#base">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Reports</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="base">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a
+                        href="../BussinessMetrics/"
+                        class="nav-link"
+                        data-id="business-metrics"
+                      >
+                        <span class="sub-item">Executive Summary</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="../Cohort/" class="nav-link" data-id="cohort">
+                        <span class="sub-item">Cohort</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="../OpenPipelines/"
+                        class="nav-link"
+                        data-id="open-pipelines"
+                      >
+                        <span class="sub-item">OpenPipelines</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="../SaasMetrics/"
+                        class="nav-link"
+                        data-id="saas-metrics"
+                      >
+                        <span class="sub-item">SaasMetrics</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+              <a href="index.html" class="logo">
+                <img
+                  src="../assets/img/kaiadmin/logo_light.svg"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="20"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                <li
+                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+                >
+                  <a
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                  >
+                    <i class="fa fa-search"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-search animated fadeIn">
+                    <form class="navbar-left navbar-form nav-search">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          placeholder="Search ..."
+                          class="form-control"
+                        />
+                      </div>
+                    </form>
+                  </ul>
+                </li>
+
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                  <a
+                    class="dropdown-toggle profile-pic"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <div class="avatar-sm">
+                      <img
+                        src="../assets/img/avatar-male.png"
+                        alt="..."
+                        class="avatar-img rounded-circle"
+                      />
+                    </div>
+                    <span class="profile-username">
+                      <span class="op-7">Hi,</span>
+                      <span class="fw-bold">Infin User</span>
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user animated fadeIn">
+                    <div class="dropdown-user-scroll scrollbar-outer">
+                      <li>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            <img
+                              src="../assets/img/avatar-male.png"
+                              alt="image profile"
+                              class="avatar-img rounded"
+                            />
+                          </div>
+                          <div class="u-text">
+                            <h4>Infin User</h4>
+                            <p class="text-muted">hello@infin.com</p>
+                            <a
+                              href="profile.html"
+                              class="btn btn-xs btn-secondary btn-sm"
+                              >View Profile</a
+                            >
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">My Balance</a>
+                        <a class="dropdown-item" href="#">Inbox</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logout-link" href="#"
+                          >Logout</a
+                        >
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+        <!-- Table Display on chart ClicK To set Up Drill Through -->
+        <div class="container">
+          <div id="popupModal" class="modal">
+            <div class="modal-content">
+              <span class="close-btn" onclick="closePopup()">&times;</span>
+              <p id="popupContent"></p>
+            </div>
+          </div>
+
+          <div class="page-inner">
+            <div
+              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-0 pb-0"
+            ></div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex align-items-center justify-content-between">
+                  <!-- Added flexbox utilities -->
+                  <div class="col-md-4">
+                    <h1 class="fw-bold">Executive Summary</h1>
+                    <!-- Added margin-end for spacing -->
+                  </div>
+                  <div class="d-flex">
+                    <div class="p-2 text-center">
+                      <strong>Comparison To</strong><br />
+                      <span
+                        id="regionValue "
+                        class="d-flex justify-content-center"
+                      >
+                        <div id="visual1"></div>
+                      </span>
+                    </div>
+                    <div class="p-2 text-center">
+                      <strong>Region</strong><br />
+                      <span
+                        id="regionValue "
+                        class="d-flex justify-content-center"
+                      >
+                        <div id="visual2"></div>
+                      </span>
+                    </div>
+                    <div class="p-2 text-center">
+                      <strong>Year</strong><br />
+                      <span
+                        id="yearValue"
+                        class="d-flex justify-content-center"
+                      >
+                        <div id="visual4"></div>
+                      </span>
+                    </div>
+                    <div class="p-2 text-center">
+                      <strong>Month</strong><br />
+                      <span
+                        id="monthValue"
+                        class="d-flex justify-content-center"
+                      >
+                        <div id="visual3"></div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-1">
+                <div class="row"></div>
+              </div>
+            </div>
+            <hr />
+
+            <!-- First Row -->
+            <div class="row">
+              <div class="col-md-3">
+                <div id="visual21"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual22"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual23"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual24"></div>
+              </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="row">
+              <div class="col-md-3">
+                <div id="visual25"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual26"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual27"></div>
+              </div>
+              <div class="col-md-3">
+                <div id="visual28"></div>
+              </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card p-2">
+                  <div class="col-md-12 d-flex justify-content-between mb-3">
+                    <div class="col-md-3 text-center">
+                      <button id="btn-visual1"
+                        class="btn visual-button btn-sm group1 active"
+                        onclick="multipleVisualChanges(['visual5'],this,'group1','#visual5, #visual6, #visual7, #visual8')"
+                      >
+                        Closed Won
+                      </button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <button id="btn-visual2"
+                        class="btn visual-button btn-sm group1"
+                        onclick="multipleVisualChanges(['visual6'],this,'group1','#visual5, #visual6, #visual7, #visual8')"
+                      >
+                        New bookings
+                      </button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <button id="btn-visual3"
+                        class="btn visual-button btn-sm group1"
+                        onclick="multipleVisualChanges(['visual7'],this,'group1','#visual5, #visual6, #visual7, #visual8')"
+                      >
+                        Cusotmers
+                      </button>
+                    </div>
+                    <div class="col-md-3 text-center">
+                      <button id="btn-visual4"
+                        class="btn visual-button btn-sm group1"
+                        onclick="multipleVisualChanges(['visual8'],this,'group1','#visual5, #visual6, #visual7, #visual8')"
+                      >
+                        Conversion Rate
+                      </button>
+                    </div>
+                  </div>
+
+                  <div id="visual5"></div>
+                  <div id="visual6" style="display: none"></div>
+                  <div id="visual7" style="display: none"></div>
+                  <div id="visual8" style="display: none"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card p-2">
+                  <div class="col-md-12 d-flex justify-content-end mb-3">
+                    <div class="col-md-6 text-center">
+                      <button id="btn-visual5 "
+                        class="btn visual-button btn-sm group2 active"
+                        onclick="multipleVisualChanges(['visual18'],this,'group2','#visual18,#visual19')"
+                      >
+                        Closed Won
+                      </button>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      <button id="btn-visual6"
+                        class="btn visual-button btn-sm group2"
+                        onclick="multipleVisualChanges(['visual19'],this,'group2','#visual18,#visual19')"
+                      >
+                        New bookings
+                      </button>
+                    </div>
+                  </div>
+                  <div id="visual18"></div>
+                  <div id="visual19" style="display: none"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 4 -->
+            <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="col-md-12 d-flex justify-content-start mb-3">
+                  <div class="col-md-3 text-center">
+                    <button id="btn-visual7"
+                      class="btn visual-button btn-sm group3 active"
+                      onclick="multipleVisualChanges(['visual11','visual13','visual16','visual17'],this,'group3','#visual10, #visual11, #visual12, #visual13, #visual14, #visual15, #visual16, #visual17')"
+                    >
+                      ARR
+                    </button>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <button id="btn-visual8"
+                      class="btn visual-button btn-sm group3"
+                      onclick="multipleVisualChanges(['visual10','visual12','visual14','visual15'],this,'group3','#visual10, #visual11, #visual12, #visual13, #visual14, #visual15, #visual16, #visual17')"
+                    >
+                      MRR
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Row 5 -->
+
+            <div class="row">
+              <div class="col-md-5">
+                <div class="card p-2">
+                  <div id="visual11"> </div>
+                  <div
+                    id="visual10"
+                    class="dynamic-div1"
+                    style="display: none"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-md-7">
+                <div class="card p-2">
+                  <div class="col-md-12 d-flex justify-content-end mb-3" style="position: absolute; top: 15px;  right: 0; z-index: 10;">
+                  <div class="col-md-3 text-center">
+                    <button id="btn-visual7"
+                      class="btn visual-button btn-sm group3 active"
+                      onclick="multipleVisualChanges(['visual11','visual13','visual16','visual17'],this,'group3','#visual10, #visual11, #visual12, #visual13, #visual14, #visual15, #visual16, #visual17')"
+                    >
+                      ARR
+                    </button>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <button id="btn-visual8"
+                      class="btn visual-button btn-sm group3"
+                      onclick="multipleVisualChanges(['visual10','visual12','visual14','visual15'],this,'group3','#visual10, #visual11, #visual12, #visual13, #visual14, #visual15, #visual16, #visual17')"
+                    >
+                      MRR
+                    </button>
+                  </div>
+                </div>
+                  <div id="visual13"></div>
+                  <div
+                    id="visual12"
+                    class="dynamic-div2"
+                    style="display: none"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 6 -->
+
+            <div class="row">
+              <div class="col-md-7">
+                <div class="card p-2">
+                  <div id="visual17"></div>
+                  <div
+                    id="visual15"
+                    class="dynamic-div4"
+                    style="display: none"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="card p-2">
+                  <div id="visual16"></div>
+
+                  <div
+                    id="visual14"
+                    class="dynamic-div3"
+                    style="display: none"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 7 -->
+            <div class="row">
+              <div class="col-md-12">
+                <div id="visual20"></div>
+              </div>
+            </div>
+
+            <!-- Extra -->
+
+            <div class="row">
+              <div class="col-md-12">
+                <div id="visual222">
+                  <canvas id="chartCanvas"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid d-flex justify-content-between"></div>
+        </footer>
+      </div>
+
+      
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="../assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <script src="../assets/js/functions.js"></script>
+
+    <script src="../assets/js/authentication.js"></script>
+    <script src="../assets/js/icon.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script src="../assets/js/apisCall.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo.js"></script>
+    <script src="../assets/js/demo.js"></script>
+    <script src="../assets/js/kaiadmin.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select the collapse element
+        var dropdown = document.getElementById("base");
+
+        // Add the 'show' class to make the dropdown open on load
+        if (dropdown) {
+          dropdown.classList.add("show");
+        }
+
+        // You can also simulate a click on the dropdown link (optional)
+        var reportsDropdown = document.getElementById("reports-dropdown");
+        if (reportsDropdown) {
+          reportsDropdown.setAttribute("aria-expanded", "true"); // Set ARIA attributes
+        }
+      });
+    </script>
+
+    <script>
+      // A $( document ).ready() block.
+      $(document).ready(function () {
+       
+        onPageLoad("page1.json");
+      });
+    </script>
+    <script>
+      // Select all nav links
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      // Add click event listener to each link
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          // Remove active class from all links
+          navLinks.forEach((link) => link.classList.remove("active"));
+
+          // Add active class to the clicked link
+          this.classList.add("active");
+        });
+      });
+    </script>
+    <script>
+      window.onload = function () {
+        const reportPageId = "c752e59afcf6e7da774f";
+        // const reportPageId = "ReportSectionbe61252ff04b6040833d";
+        setPageId(reportPageId);
+        showLoader();
+  
+        verifyToken(); // Call token verification function on page load
+      };
+    </script>
+    <script>
+      //remove token from localstorage
+      document
+        .getElementById("logout-link")
+        .addEventListener("click", function (event) {
+          // Prevent the default action
+          event.preventDefault();
+
+          // Get the token from local storage
+          var token = localStorage.getItem("token");
+
+          console.log(token);
+
+          deleteToken(token);
+        });
+    </script>
+  </body>
+</html>

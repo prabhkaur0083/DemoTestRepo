@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>InFin.ai</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="../assets/img/InfinLogo/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+
+    <script src="../assets/js/functions.js"></script>
+    <script src="../assets/js/icon.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="loader" style="display: none">
+      <div class="spinner"></div>
+    </div>
+    <div class="wrapper" id="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="light">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="light">
+            <a href="index.html" class="logo">
+              <img
+                src="../assets/img/InfinLogo/infin.svg"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="50"
+              />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item ">
+                <a href="../">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#base">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Reports</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="base">
+                   <ul class="nav nav-collapse">
+                    <li>
+                      <a
+                        href="../BussinessMetrics/"
+                        class="nav-link"
+                        data-id="business-metrics"
+                      >
+                        <span class="sub-item">Executive Summary</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="../Cohort/" class="nav-link" data-id="cohort">
+                        <span class="sub-item">Cohort</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="../OpenPipelines/"
+                        class="nav-link"
+                        data-id="open-pipelines"
+                      >
+                        <span class="sub-item">OpenPipelines</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="../SaasMetrics/"
+                        class="nav-link"
+                        data-id="saas-metrics"
+                      >
+                        <span class="sub-item">SaasMetrics</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="light">
+              <a href="index.html" class="logo">
+                <img
+                  src="../assets/img/InfinLogo/infin.svg"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="50"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              <nav
+                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
+              ></nav>
+
+              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                  <a
+                    class="dropdown-toggle profile-pic"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <div class="avatar-sm">
+                      <img
+                        src="../assets/img/avatar-male.png"
+                        alt="..."
+                        class="avatar-img rounded-circle"
+                      />
+                    </div>
+                    <span class="profile-username">
+                      <span class="op-7">Hi,</span>
+                      <span class="fw-bold">InfinUser</span>
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user animated fadeIn">
+                    <div class="dropdown-user-scroll scrollbar-outer">
+                      <li>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            <img
+                              src="../assets/img/avatar-male.png"
+                              alt="image profile"
+                              class="avatar-img rounded"
+                            />
+                          </div>
+                          <div class="u-text">
+                            <h4>Hizrian</h4>
+                            <p class="text-muted">demo@infin.com</p>
+                            <a
+                              href="profile.html"
+                              class="btn btn-xs btn-secondary btn-sm"
+                              >View Profile</a
+                            >
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">My Balance</a>
+                        <a class="dropdown-item" href="#">Inbox</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Account Setting</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+        <div class="container">
+          <div class="page-inner">
+            <div
+              class="d-flex align-items-left align-items-md-center flex-column flex-md-row"
+            ></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex align-items-center">
+                  <!-- Added flexbox utilities -->
+                  <div class="col-md-8">
+                    <h1 class="fw-bold">SAAS Metrics</h1>
+                    <!-- Added margin-end for spacing -->
+                  </div>
+
+                  <div class="col-md-2 p-2 text-center">
+                    <strong>Month</strong><br />
+                    <span id="yearValue" class="d-flex justify-content-center"
+                      ><div id="visual1"></div
+                    ></span>
+                  </div>
+                  <div class="col-md-2 p-2 text-center">
+                    <strong>Year</strong><br />
+                    <span id="monthValue" class="d-flex justify-content-center"
+                      ><div id="visual2"></div
+                    ></span>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row mb-3 ms-2">
+                <div class="col-md-3 text-center">
+                  <div class="custom-border p-1">
+                    <strong>Growth</strong>
+                  </div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <div class="custom-border p-1">
+                    <strong>RETENTION</strong>
+                  </div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <div class="custom-border p-1">
+                    <strong>PROFIT & OPEX</strong>
+                  </div>
+                </div>
+                <div class="col-md-3 text-center">
+                  <div class="custom-border p-1">
+                    <strong>EFFICENCY</strong>
+                  </div>
+                </div>
+              </div>
+              <!-- First Row -->
+              <div class="row ms-2">
+                <div class="col-md-3">
+                  <div id="visual7"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual15"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual13"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual3"></div>
+                </div>
+              </div>
+              <div class="row ms-2">
+                <div class="col-md-3">
+                  <div id="visual8"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual17"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual11"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual4"></div>
+                </div>
+              </div>
+              <div class="row ms-2">
+                <div class="col-md-3">
+                  <div id="visual9"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual16"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual12"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual5"></div>
+                </div>
+              </div>
+              <div class="row ms-2 ">
+                <div class="col-md-3">
+                  <div></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual14"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual10"></div>
+                </div>
+                <div class="col-md-3">
+                  <div id="visual6"></div>
+                </div>
+              </div>
+
+            
+
+
+
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+
+    <script src="../assets/js/kaiadmin.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+    <script src="../assets/js/authentication.js"></script>
+
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
+    <script src="../assets/js/apisCall.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="../assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+
+   
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select the collapse element
+        var dropdown = document.getElementById("base");
+
+        // Add the 'show' class to make the dropdown open on load
+        if (dropdown) {
+          dropdown.classList.add("show");
+        }
+
+        // You can also simulate a click on the dropdown link (optional)
+        var reportsDropdown = document.getElementById("reports-dropdown");
+        if (reportsDropdown) {
+          reportsDropdown.setAttribute("aria-expanded", "true"); // Set ARIA attributes
+        }
+      });
+    </script>
+    <script>
+      window.onload = function () {
+        const reportPageId = "a3d790f3516b6509d19c";
+        setPageId(reportPageId);
+        showLoader();
+        verifyToken(); // Call token verification function on page load
+      };
+    </script>
+    <script>
+      // A $( document ).ready() block.
+      $(document).ready(function () {
+        // const reportPageId = "45d4edfc066a8e71895a";
+        
+        onPageLoad("page3.json");
+      });
+    </script>
+    <script>
+      // Select all nav links
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      // Add click event listener to each link
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+          // Remove active class from all links
+          navLinks.forEach((link) => link.classList.remove("active"));
+
+          // Add active class to the clicked link
+          this.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
