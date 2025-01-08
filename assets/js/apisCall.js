@@ -11,7 +11,7 @@ function setPageId(reportPageId) {
 // Define the base URL of your API
 const baseURL = "https://infin-backend-container-eygdbefchbcqg8e8.centralindia-01.azurewebsites.net"; // Update this to your FastAPI server address
 
-// const baseURL = "http://127.0.0.1:8081";
+// const baseURL = "http://0.0.0.0:8081";
 // Function to fetch visual data from the FastAPI endpoint
 async function fetchVisualData(workspaceId, reportId, pagename) {
   try {
@@ -63,7 +63,6 @@ async function fetchJsonData(filepath) {
 
 async function filterData(reportpageId) {
   const workspaceId = "beea22fe-2757-4adc-82b0-6795671b4c4f";
-  // const reportId = "161ec551-c161-4635-9410-dc5e63d4e3c7";
   const reportId = "c7cf06fc-f6a8-4bed-8a8f-3d5b88d8bb3e";
 
 
@@ -356,7 +355,7 @@ function createTable(Title, Columns, Rows, visualTable) {
           <div class="card-title">${Title}</div>
         </div>
         <div class="card-body">
-          <div style="max-height: 400px; overflow-y: auto;"> <!-- Set fixed height for rows and enable scrolling -->
+          <div style="max-height: 600px; overflow-y: auto;"> <!-- Set fixed height for rows and enable scrolling -->
             <table class="table table-hover" style="table-layout: fixed; width: 100%;">
               <thead style="position: sticky; top: 0; background-color: white; z-index: 1;">
                 <tr>
@@ -421,34 +420,31 @@ function closePopup() {
 // Register the ChartDataLabels plugin globally
 Chart.register(ChartDataLabels);
 
-
-//create Area Chart
 function createChart(chartData, x, y, visualId, chartType) {
-  document.getElementById(visualId).textContent = ""
+  document.getElementById(visualId).textContent = "";
 
   const htmlStructure = `
-      <div class="col-md-12">
-        <div class="" style="border-radius: 15px;  ">
-          <div class="card-header">
-              <div class="card-title  fw-bold">${chartData}</div>
-            </div>
-        
-          <div class="card-body">
-            <div class="chart-container" style="position: relative; "width: 50%; height: 100%;">
-              <canvas id="lineChart${visualId}" style="height:100%" ></canvas>
-            </div>
+    <div class="col-md-12">
+      <div class="" style="border-radius: 15px;">
+        <div class="card-header">
+          <div class="card-title fw-bold">${chartData}</div>
+        </div>
+        <div class="card-body">
+          <div 
+            class="chart-container" 
+            style="display:flex; justify-content:center; align-items:end; width: 100%; height: 300px; position:relative;">
+            <canvas id="lineChart${visualId}" style="max-height: 100%; max-width: 100%;"></canvas>
           </div>
         </div>
       </div>
-    `;
+    </div>
+  `;
 
   // Insert the HTML structure into the target element
   document.getElementById(visualId).innerHTML += htmlStructure;
 
   // Initialize the chart
   const chartCanvas = document.getElementById(`lineChart${visualId}`);
-
-
 
   new Chart(chartCanvas, {
     type: chartType,
@@ -459,179 +455,206 @@ function createChart(chartData, x, y, visualId, chartType) {
         lineTension: 0.3,
         backgroundColor: "#5834db",
         borderColor: "#CCCCFF",
-        hoverBackgroundColor: "grey",
+        hoverBackgroundColor: "#5dade2",
         hoverBorderColor: "#FF0000",
-        data: y
-      }]
+        data: y,
+      }, ],
     },
     options: {
-      plugins: {
-        legend: {
-          display: false, // Hide the legend
-        },
-        title: {
-          display: true,
-          text: "",
-          color: "#5834db",
-          font: {
-            size: 18 // Adjust the size as desired
-          }
-        },
-        datalabels: x.length < 10 ? { // Apply datalabels only when there are fewer than 10 bars
-          anchor: "end",
-          align: "end",
-          color: "#2A2F5B",
-          font: {
-            weight: "bold",
-          },
-          formatter: (value, context) => {
-            const minValue = Math.min(...context.dataset.data);
+      maintainAspectRatio: false, // Allow the chart to fill the div's dimensions
+      responsive: true, // Make the chart responsive
+       plugins: {
+                   legend: {
+                     display: false, // Hide the legend
+                   },
+                   title: {
+                     display: true,
+                     text: "",
+                     color: "#5834db",
+                     font: {
+                       size: 18 // Adjust the size as desired
+                     }
+                   },
+                   datalabels: x.length < 10 ? { // Apply datalabels only when there are fewer than 10 bars
+                     anchor: "end",
+                     align: "end",
+                     color: "#2A2F5B",
+                     font: {
+                       weight: "bold",
+                     },
+                     formatter: (value, context) => {
+                       const minValue = Math.min(...context.dataset.data);
 
-            if (minValue >= 1000000) {
-              value = '$' + (value / 1000000).toFixed(1) + 'M'; // Format as millions
-            } else if (minValue >= 1000) {
-              value = '$' + Math.round(value / 1000) + 'K'; // Format as thousands
-            } else {
-              value = value; // Keep the original value
-            }
+                       if (minValue >= 1000000) {
+                         value = '$' + (value / 1000000).toFixed(1) + 'M'; // Format as millions
+                       } else if (minValue >= 1000) {
+                         value = '$' + Math.round(value / 1000) + 'K'; // Format as thousands
+                       } else {
+                         value = value; // Keep the original value
+                       }
 
-            return `${value}`; // Return the formatted value
-          }
-        } : false, // Disable datalabels if more than 10 bars
-
+                       return `${value}`; // Return the formatted value
+                     }
+                   } : false,
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
               let value = tooltipItem.raw; // Get the raw value from the dataset
-
               return `${value}`; // Return the formatted value with '$' symbol
-            }
-          }
-        }
-
+            },
+          },
+        },
       },
       scales: {
         x: {
           grid: {
-            display: false // Hide x-axis grid lines
+            display: false, // Hide x-axis grid lines
           },
           ticks: {
-            min: 0
-          }
+            min: 0,
+          },
         },
         y: {
           grid: {
-            display: false // Hide y-axis grid lines
+            display: false, // Hide y-axis grid lines
           },
           ticks: {
             display: false, // Hide y-axis ticks (values)
-          }
-        }
+          },
+        },
       },
-      // Add an onClick event in the chart options
+      barThickness: x.length > 3 ? undefined : 45,
       onClick: async (event, elements) => {
         if (elements.length > 0) {
-          // `elements[0]` represents the clicked bar
           const index = elements[0].index;
-          const datasetIndex = elements[0].datasetIndex;
-
-          // Retrieve value of the clicked bar
           const value = elements[0].element.$context.raw;
 
-          // Retrieve the x-axis label for the clicked bar
-          const chart = event.chart; // Assuming this refers to the chart instance
+          const xAxisLabel = event.chart.data.labels[index];
+          const drilData = await DrillThroughFilter(xAxisLabel, chartData);
 
-          const xAxisLabel = chart.data.labels[index]; // Get the label from the x-axis (labels)
-
-
-
-          drilData = await DrillThroughFilter(xAxisLabel, chartData);
-
-          // Display modal with information about the clicked bar
           const modal = document.getElementById("popupModal");
           const content = document.getElementById("popupContent");
 
-          // Clear any previous content
-          content.innerHTML = '';
+          content.innerHTML = "";
 
-          // Create the table HTML
-          const table = document.createElement('table');
+          const table = document.createElement("table");
           const tableHeader = `
             <thead>
-                <tr>
-                    <th>Sr No.</th>
-                    <th>Deal Name</th>
-                    <th>Deal Amount</th>
-                    <th>Region</th>
-                    <th>Industry</th>
-                    <th>DealType</th>
-                    <th>DealStage</th>
-                    <th>LeadSource</th>
-                    <th>Create Date</th>
-                </tr>
+              <tr>
+                <th>Deal Name</th>
+                <th>AE Owner </th>
+                <th>Deal Amount</th>
+                <th>Region</th>
+                <th>Industry</th>
+                <th>DealType</th>
+                <th>DealStage</th>
+                <th>Create Date</th>
+              </tr>
             </thead>
-        `;
+          `;
 
-          // Create table rows from API response
-          let tableRows = '<tbody>';
-          // Check if drill data exists and is an array
+          let tableRows = "<tbody>";
           if (Array.isArray(drilData.Data.Data)) {
-
-            // Loop through the data if it is an array
             drilData.Data.Data.forEach((item, index) => {
-              // Format the date (ISO to readable format)
               const formattedDate = new Date(item.CreateDate).toLocaleDateString("en-US");
-
               tableRows += `
                 <tr>
-                    <td>${index + 1}</td>
-                    <td>${item.DealName}</td>
-                    <td>${item.DealAmount}</td>
-                    <td>${item.Region || 'N/A'}</td>  <!-- Optional Currency -->
-                    <td>${item.Industry}</td>
-                    <td>${item.DealType}</td>
-                    <td>${item.Stage}</td>
-                    <td>${item.LeadSource}</td>
-                    <td>${formattedDate}</td>
+                  <td>${item.DealName}</td>
+                  <td>${item.AccoutAEOwner} </td>
+                  <td>${item.DealAmount}</td>
+                  <td>${item.Region || "N/A"}</td>
+                  <td>${item.Industry}</td>
+                  <td>${item.DealType}</td>
+                  <td>${item.Stage}</td>
+                  <td>${formattedDate}</td>
                 </tr>
-            `;
+              `;
             });
           } else {
-
-
-            // If no data or invalid data, show a "No data" message
-            tableRows += `<tr><td colspan="4">No data available</td></tr>`;
+            tableRows += `<tr><td colspan="9">No data available</td></tr>`;
           }
-          tableRows += '</tbody>';
 
-          // Append the header and rows to the table
+          tableRows += "</tbody>";
           table.innerHTML = tableHeader + tableRows;
 
-          table.style.width = '100%'; // Ensure the table takes full width of container
-          const header = table.querySelector('thead');
-          header.style.position = 'sticky';
-          header.style.top = '0';
-          header.style.backgroundColor = 'white'; // Set background color for visibility
-          header.style.zIndex = '1';
+          table.style.width = "100%";
+          const header = table.querySelector("thead");
+          header.style.position = "sticky";
+          header.style.top = "0";
+          header.style.backgroundColor = "white";
+          header.style.zIndex = "1";
 
-          const tableContainer = document.createElement('div');
-          tableContainer.style.height = '300px'; // Adjust the height as needed
-          tableContainer.style.overflowY = 'auto'; // Enables vertical scrolling if content exceeds height
+          const tableContainer = document.createElement("div");
+          tableContainer.style.height = "500px";
+          tableContainer.style.overflowY = "auto";
           tableContainer.appendChild(table);
 
-          // Add the table to the modal content
           content.appendChild(tableContainer);
 
-          // Show the modal
           modal.style.display = "block";
-
         }
-      }
-
-    }
+      },
+    },
   });
-
 }
+
+
+// Function to display drill-down data in a modal
+function displayModal(drillData) {
+  const modal = document.getElementById("popupModal");
+  const content = document.getElementById("popupContent");
+
+  // Clear any previous content
+  content.innerHTML = '';
+
+  // Create the table HTML
+  const table = document.createElement('table');
+  const tableHeader = `
+    <thead>
+      <tr>
+        <th>Sr No.</th>
+        <th>Deal Name</th>
+        <th>Deal Amount</th>
+        <th>Region</th>
+        <th>Industry</th>
+        <th>DealType</th>
+        <th>DealStage</th>
+        <th>LeadSource</th>
+        <th>Create Date</th>
+      </tr>
+    </thead>
+  `;
+
+  let tableRows = '<tbody>';
+  if (Array.isArray(drillData.Data.Data)) {
+    drillData.Data.Data.forEach((item, index) => {
+      const formattedDate = new Date(item.CreateDate).toLocaleDateString("en-US");
+      tableRows += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${item.DealName}</td>
+          <td>${item.DealAmount}</td>
+          <td>${item.Region || 'N/A'}</td>
+          <td>${item.Industry}</td>
+          <td>${item.DealType}</td>
+          <td>${item.Stage}</td>
+          <td>${item.LeadSource}</td>
+          <td>${formattedDate}</td>
+        </tr>
+      `;
+    });
+  } else {
+    tableRows += `<tr><td colspan="9">No data available</td></tr>`;
+  }
+
+  tableRows += '</tbody>';
+  table.innerHTML = tableHeader + tableRows;
+  content.appendChild(table);
+
+  // Show the modal
+  modal.style.display = "block";
+}
+
 
 
 
@@ -1067,13 +1090,13 @@ function createCohertTable(Title, Columns, Rows, visualTable) {
 
 
 // Visual Change  based on selected Button (Hide/Show)
-function multipleVisualChanges(selectedIds,selectedButtonId, buttongroupName,allIds) {
+function multipleVisualChanges(selectedIds, selectedButtonId, buttongroupName, allIds) {
 
   // Corrected selector with all IDs in a single string
   const newdivs = document.querySelectorAll(allIds);
   const buttons = document.querySelectorAll(`.${buttongroupName}`);
-  buttons.forEach(button =>{
-    
+  buttons.forEach(button => {
+
   })
 
 
@@ -1177,45 +1200,39 @@ function getRandomColor() {
 async function DrillThroughFilter(xLabel, title) {
   try {
 
-    let apiPoint = "";
     let column = "";
-
 
     if (title === "New Bookings (#)" || title === "Closed Won ($)") {
       column = "Region"
-      apiPoint = "IndustryARR"
     } else if (title === "ARR by Industry" || title === "MRR by Industry") {
       column = "Industry"
-      apiPoint = "IndustryARR"
     } else if (title === "ARR vs Lead Source" || title === "MRR vs Lead Source") {
       column = "LeadSource"
-      apiPoint = "IndustryARR"
     } else if (title === "ARR by AE Owner" || title === "MRR by AE Owner") {
       column = "AccountExecutiveName"
-      apiPoint = "IndustryARR"
-    } else {
-      console.log("gjgvvjhb")
+    } else if (title === "Cust.Count EOM by Year-Month" ) {
+      column = "CustomerCount"
+    }else {
+      console.log("No Filtertaion API There..")
     }
+
     const year = localStorage.getItem("Year")
     const monthString = localStorage.getItem("Month")
 
     // Split the month string into an array by comma and trim any extra spaces
     const monthsList = monthString.split(",").map(month => month.trim());
 
-
-
     // Define the data to be sent in the request body
     const filterData = {
       Year: year, // Example year
       Month: monthsList, // Example months
-      Region: "North America", // Optional field
       ColumnName: column, // Optional field
       ColumnValue: xLabel
     };
 
 
     // Make a POST request to the API endpoint
-    const response = await fetch(`http://127.0.0.1:8081/api/v1/report/filterData/${apiPoint}/get`, {
+    const response = await fetch(`${baseURL}/api/v1/report/filterData/get`, {
       method: 'POST', // Specify the HTTP method
       headers: {
         'Content-Type': 'application/json', // Set the content type to JSON
