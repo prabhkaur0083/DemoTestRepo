@@ -1217,6 +1217,7 @@ async function DrillThroughFilter(xLabel, title) {
     }
 
     const year = localStorage.getItem("Year")
+    
     const monthString = localStorage.getItem("Month")
 
     // Split the month string into an array by comma and trim any extra spaces
