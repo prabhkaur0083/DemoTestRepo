@@ -1,16 +1,15 @@
-
 const baseUrl = "https://infin-backend-container-eygdbefchbcqg8e8.centralindia-01.azurewebsites.net"
 async function loginUser(formData) {
     try {
         const response = await fetch(`${baseUrl}/api/v1/user/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'  // Set content type to JSON
+                'Content-Type': 'application/json' // Set content type to JSON
             },
-            body:  JSON.stringify(formData)
+            body: JSON.stringify(formData)
         });
-        
-        
+
+
         const data = await response.json();
 
         if (data.Status === 1) {
@@ -18,7 +17,7 @@ async function loginUser(formData) {
             await fetchProtectedResource(data.token);
         } else {
             errorMessageElement.textContent = 'Invalid Email or Password, Please Check Your Credentials';
-			errorMessageElement.style.display = 'block';
+            errorMessageElement.style.display = 'block';
         }
     } catch (error) {
         console.error('Error during login:', error);
@@ -32,7 +31,7 @@ function storeToken(token) {
 
 async function fetchProtectedResource(token) {
     try {
-       
+
         window.location.href = "../";
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -42,13 +41,13 @@ async function fetchProtectedResource(token) {
 function showLoader() {
     document.getElementById('loader').style.display = 'block';
     document.getElementById("wrapper").classList.add("blur");
-  }
-  
-  function hideLoader() {
+}
+
+function hideLoader() {
     document.getElementById('loader').style.display = 'none';
     document.getElementById("wrapper").classList.remove("blur");
-  }
-  
+}
+
 
 function showErrorMessage(message) {
     const errorMessageElement = document.getElementById('error-message'); // Assuming there's an element with this ID
@@ -63,7 +62,9 @@ async function deleteToken(token) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ token: token }),
+            body: JSON.stringify({
+                token: token
+            }),
         });
 
         const data = await response.json();
@@ -78,7 +79,7 @@ async function deleteToken(token) {
         localStorage.removeItem('token');
 
         // Redirect to the login page or another appropriate page
-        window.location.href = '/Frontend/Login/index.html';
+        window.location.href = '/Login/index.html';
 
     } catch (error) {
         console.error('Error:', error);
@@ -103,25 +104,24 @@ async function verifyToken() {
 
         if (response.ok) {
 
-            if (data.Status == 1 ){
+            if (data.Status == 1) {
                 console.log('Token verified:', data);
-            }
-            else {
+            } else {
                 console.error('Token verification failed:', data);
-                window.location.href = '/Frontend/Login/index.html';  // Redirect to login page if token is invalid or expired
-        }
-            
-            
+                window.location.href = '/Login/index.html'; // Redirect to login page if token is invalid or expired
+            }
+
+
             // Proceed with the next steps after token verification
         } else {
             console.error('Something Went Wrong:', data);
-            window.location.href = '/Frontend/Login/index.html';  // Redirect to login page if token is invalid or expired
+            window.location.href = '/Login/index.html'; // Redirect to login page if token is invalid or expired
         }
-        
+
         hideLoader();
 
     } catch (error) {
         console.error('Error verifying token:', error);
-         window.location.href = '/Frontend/Login/index.html';  // Redirect to login page in case of any error
+        window.location.href = '/Login/index.html'; // Redirect to login page in case of any error
     }
 }
