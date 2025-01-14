@@ -690,7 +690,7 @@ function createDonutChart(chartData, x, y, visualId) {
     data: {
       labels: x, // Labels for your segments
       datasets: [{
-        label: 'My Doughnut Chart',
+        label: '',
         data: y, // Data values for each segment
         backgroundColor: [
           '#5834db',
